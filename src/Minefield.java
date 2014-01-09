@@ -1,3 +1,6 @@
+/**
+ * @author Andy Vuong
+ */
 
 public class Minefield {
 
@@ -22,6 +25,10 @@ public class Minefield {
 		this.totalMines = totalMines;
 		this.dataField = new int[this.width][this.length];
 		this.revealedField = new boolean[this.width][this.length];
+		
+		//initiate the game
+		generateMineField(this.totalMines);
+		generateFieldStatistics();
 	}
 	
 	/**
@@ -136,7 +143,7 @@ public class Minefield {
 		return this.totalMines;
 	}
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		Minefield a = new Minefield(10, 10);
 		a.printDataField();
 		a.generateMineField(30);
@@ -145,5 +152,5 @@ public class Minefield {
 		a.generateFieldStatistics();
 		System.out.println();
 		a.printDataField();
-	}
+	} */
 }
