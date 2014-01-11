@@ -8,6 +8,7 @@ public class Minefield {
 	private boolean[][] revealedField;
 	private int size,length,width;
 	private int totalMines;
+	private boolean isNewGame;
 	
 	/**
 	 * Creates an instance of the Minefield class with the length, size, and width parameter
@@ -19,7 +20,7 @@ public class Minefield {
 	 */
 	
 	public Minefield(int size, int totalMines) {
-		this.size = size;
+		this.size = size*size;
 		this.length = size;
 		this.width = size;
 		this.totalMines = totalMines;
@@ -43,8 +44,8 @@ public class Minefield {
 		int value;
 		MAIN:
 		while(mines>0) {
-			for(int x=0; x<this.size; x++) {
-				for(int y=0; y<this.size; y++) {
+			for(int x=0; x<this.width; x++) {
+				for(int y=0; y<this.length; y++) {
 					value = placeRandomMine();
 					if(this.dataField[x][y]!=-1 && value==-1) {
 						this.dataField[x][y] = -1;
@@ -74,8 +75,8 @@ public class Minefield {
 	 * Each position is iterated through and assigned a value that indicates surrounding mines.
 	 */
 	public void generateFieldStatistics() {
-		for(int x=0; x<this.size; x++) {
-			for(int y=0; y<this.size; y++) {
+		for(int x=0; x<this.width; x++) {
+			for(int y=0; y<this.length; y++) {
 				if(this.dataField[x][y]!=-1)
 					this.dataField[x][y] = numberOfMines(x,y);
 			}
@@ -107,7 +108,7 @@ public class Minefield {
 	 * @return -1 if the current position is a mine
 	 */
 	public int getMineAtPos(int x, int y) {
-		if(x>=this.size || y>=this.size || x<0 || y<0) //return the 0 if the position is invalid(index out of bounds)
+		if(x>=this.width || y>=this.length || x<0 || y<0) //return the 0 if the position is invalid(index out of bounds)
 			return 0;
 		else
 			return (this.dataField[x][y]==-1 ? 1: 0);
@@ -117,8 +118,8 @@ public class Minefield {
 	 * Print the contents of the dataField matrix as a representation of the mine field. 
 	 */
 	public void printDataField() {
-		for(int x=0; x<this.size; x++) {
-			for(int y=0; y<this.size; y++) {
+		for(int x=0; x<this.width; x++) {
+			for(int y=0; y<this.length; y++) {
 				System.out.print("	" + this.dataField[x][y]);
 			}
 			System.out.println();
@@ -142,15 +143,12 @@ public class Minefield {
 	public int getTotalMines() {
 		return this.totalMines;
 	}
+	
+	public int getValueAtPos(int x, int y){
+		return this.dataField[x][y];
+	}
 
-	/*public static void main(String args[]) {
-		Minefield a = new Minefield(10, 10);
-		a.printDataField();
-		a.generateMineField(30);
-		System.out.println();
-		a.printDataField();
-		a.generateFieldStatistics();
-		System.out.println();
-		a.printDataField();
-	} */
+	public void setIsNewGame(boolean a) {
+		this.isNewGame = a;
+	}
 }
