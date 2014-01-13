@@ -1,14 +1,12 @@
 /**
- * @author Andy Vuong
+ * @author Andy
  */
 
 public class Minefield {
 
-	private int[][] dataField;
-	private boolean[][] revealedField;
+	private int[][] dataField; //data defines game board
 	private int size,length,width;
-	private int totalMines;
-	private boolean isNewGame;
+	private int totalMines; //total number of mines on the field
 	
 	/**
 	 * Creates an instance of the Minefield class with the length, size, and width parameter
@@ -25,7 +23,7 @@ public class Minefield {
 		this.width = size;
 		this.totalMines = totalMines;
 		this.dataField = new int[this.width][this.length];
-		this.revealedField = new boolean[this.width][this.length];
+		
 		
 		//initiate the game
 		generateMineField(this.totalMines);
@@ -148,7 +146,4 @@ public class Minefield {
 		return this.dataField[x][y];
 	}
 
-	public void setIsNewGame(boolean a) {
-		this.isNewGame = a;
-	}
 }
